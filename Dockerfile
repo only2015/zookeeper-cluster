@@ -8,9 +8,9 @@ ENV PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOMR/bin
 ENV ZK_HOME /usr/local/fn/zookeeper
 
 RUN mkdir -p /usr/java/
-RUN cd /tmp && \
+RUN cd /usr/java/ && \
     curl -L -O -H "Cookie: oraclelicense=accept-securebackup-cookie" -k "http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz" && \
-    tar zvxf jdk-8u141-linux-x64.tar.gz -C /usr/java/ && \
+    tar zvxf jdk-8u141-linux-x64.tar.gz . && \
     rm -f jdk-8u141-linux-x64.tar.gz && \
     ln -s /usr/java/jdk* /usr/java/jdk && \
     ln -s /usr/java/jdk /usr/java/jvm && 
