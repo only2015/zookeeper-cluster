@@ -9,7 +9,7 @@ ENV ZK_HOME /usr/local/fn/zookeeper
 
 RUN mkdir -p /usr/java/
 WORKDIR  /usr/java
-RUN curl -L -O -H "Cookie: oraclelicense=accept-securebackup-cookie" -k "http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz" && \
+RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz" && \
     tar zvxf jdk-8u141-linux-x64.tar.gz . && \
     rm -f jdk-8u141-linux-x64.tar.gz && \
     ln -s /usr/java/jdk* /usr/java/jdk && \
