@@ -8,8 +8,19 @@ ENV PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOMR/bin
 ENV ZK_HOME /usr/local/fn/zookeeper
 
 RUN mkdir -p /usr/java/
-ADD jdk-8u121-linux-x64.tar.gz /usr/java/
-RUN cd /usr/java/ && mv jdk1.8.0_121 jdk
+RUN cd /tmp && \
+    curl -L -O -H "Cookie: oraclelicense=accept-securebackup-cookie" -k "http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz" && \
+    tar zvxf jdk-8u141-linux-x64.tar.gz -C /usr/java/ && \
+    rm -f jdk-8u141-linux-x64.tar.gz && \
+    ln -s /usr/java/jdk* /usr/java/jdk && \
+    ln -s /usr/java/jdk /usr/java/jvm && \
+    chown -R java:java /usr/java/ && \
+
+# Define commonly used JAVA_HOME variable
+# Add /srv/java and jdk on PATH variable
+ENV JAVA_HOME=/usr/java/jdk \
+    PATH=${PATH}:/usr/java/jdk/bin:/srv/java
+RUN cd /usr/java/ && mv jdk1.8.0_141 jdk
 
 ADD zookeeper-3.4.9.tar.gz /usr/local/fn/
 RUN ln -s /usr/local/fn/zookeeper-3.4.9 ${ZK_HOME}
