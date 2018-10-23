@@ -13,8 +13,8 @@ RUN cd /tmp && \
     tar zvxf jdk-8u141-linux-x64.tar.gz -C /usr/java/ && \
     rm -f jdk-8u141-linux-x64.tar.gz && \
     ln -s /usr/java/jdk* /usr/java/jdk && \
-    ln -s /usr/java/jdk /usr/java/jvm && \
-    chown -R java:java /usr/java/ 
+    ln -s /usr/java/jdk /usr/java/jvm && 
+   
 
 # Define commonly used JAVA_HOME variable
 # Add /srv/java and jdk on PATH variable
