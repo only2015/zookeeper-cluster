@@ -20,8 +20,10 @@ RUN cd /tmp && \
 # Add /srv/java and jdk on PATH variable
 ENV JAVA_HOME=/usr/java/jdk \
     PATH=${PATH}:/usr/java/jdk/bin:/srv/java
-RUN cd /usr/java/ && mv jdk1.8.0_141 jdk
-
+RUN cd /usr/java/ && mv jdk1.8.0_141 jdk && \
+    cd /usr/local/fn/ && \
+    wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz && \
+    
 ADD zookeeper-3.4.9.tar.gz /usr/local/fn/
 RUN ln -s /usr/local/fn/zookeeper-3.4.9 ${ZK_HOME}
 
