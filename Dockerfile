@@ -18,11 +18,11 @@ RUN curl -L -O -H "Cookie: oraclelicense=accept-securebackup-cookie" -k "http://
 
 # Define commonly used JAVA_HOME variable
 # Add /srv/java and jdk on PATH variable
-ENV JAVA_HOME=/usr/java/jdk \
-    PATH=${PATH}:/usr/java/jdk/bin:/srv/java
+ENV JAVA_HOME=/usr/java/jdk 
+ENV PATH=${PATH}:/usr/java/jdk/bin:/srv/java
 WORKDIR /usr/java
 RUN  mv jdk1.8.0_141 jdk 
-WORKDIR /usr/local/fN
+WORKDIR /usr/local/fn
 RUN  wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz 
     
 ADD zookeeper-3.4.9.tar.gz /usr/local/fn/
