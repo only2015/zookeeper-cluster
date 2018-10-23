@@ -8,8 +8,8 @@ ENV PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOMR/bin
 ENV ZK_HOME /usr/local/fn/zookeeper
 
 RUN mkdir -p /usr/java/
-RUN cd /usr/java/ && \
-    curl -L -O -H "Cookie: oraclelicense=accept-securebackup-cookie" -k "http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz" && \
+WORKDIR  /usr/java
+RUN curl -L -O -H "Cookie: oraclelicense=accept-securebackup-cookie" -k "http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz" && \
     tar zvxf jdk-8u141-linux-x64.tar.gz . && \
     rm -f jdk-8u141-linux-x64.tar.gz && \
     ln -s /usr/java/jdk* /usr/java/jdk && \
@@ -20,9 +20,10 @@ RUN cd /usr/java/ && \
 # Add /srv/java and jdk on PATH variable
 ENV JAVA_HOME=/usr/java/jdk \
     PATH=${PATH}:/usr/java/jdk/bin:/srv/java
-RUN cd /usr/java/ && mv jdk1.8.0_141 jdk && \
-    cd /usr/local/fn/ && \
-    wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz 
+WORKDIR /usr/java
+RUN  mv jdk1.8.0_141 jdk 
+WORKDIR /usr/local/fN
+RUN  wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz 
     
 ADD zookeeper-3.4.9.tar.gz /usr/local/fn/
 RUN ln -s /usr/local/fn/zookeeper-3.4.9 ${ZK_HOME}
