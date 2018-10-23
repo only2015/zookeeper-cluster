@@ -19,10 +19,9 @@ ENV JAVA_HOME=/usr/java/jdk
 ENV PATH=${PATH}:/usr/java/jdk/bin:/srv/java
 RUN mkdir -p /usr/local/fn && \
     cd /usr/local/fn/  && \
-   wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
-
-ADD zookeeper-3.4.9.tar.gz /usr/local/fn/
-RUN ln -s /usr/local/fn/zookeeper-3.4.9 ${ZK_HOME}
+   wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz && \
+   tar zxvf zookeeper-3.4.9.tar.gz /usr/local/fn/ &&\
+   ln -s /usr/local/fn/zookeeper-3.4.9 ${ZK_HOME}
 
 EXPOSE 2181
 
